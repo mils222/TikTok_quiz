@@ -15,9 +15,17 @@ class StartActivity : AppCompatActivity() {
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.startQuizBTN.setOnClickListener {
+
+        binding.prviNivo.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+
+        binding.drugiNivo.setOnClickListener {
+            val intent = Intent(this, DrugiNivo::class.java)
+            startActivity(intent)
+        }
+
+
     }
 }

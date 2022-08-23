@@ -6,20 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".StartActivity">
 
+    <TextView
+        android:id="@+id/prviNivoTekst"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="6dp"
+        android:gravity="center"
+        android:text="TIKTOK KVIZ"
+        android:textSize="50sp"
+        android:textColor="@color/black"
+        android:textFontWeight="@integer/material_motion_duration_short_2"
+        app:layout_constraintBottom_toTopOf="@+id/prviNivo"
+
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <Button
-        android:id="@+id/startQuizBTN"
-        android:layout_width="208dp"
-        android:layout_height="100dp"
+        android:id="@+id/prviNivo"
+        android:layout_width="200dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/roundstyle"
-        android:text="Start Quiz"
+        android:text="PRVI NIVO"
         android:textSize="25sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+    </Button>
+
+
+
+    <Button
+        android:id="@+id/drugiNivo"
+        android:layout_width="200dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="170dp"
+        android:background="@drawable/roundstyle"
+        android:text="DRUGI NIVO"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
         >
     </Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,14 +1,12 @@
 package com.example.tiktokquiz
 
-import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.tiktokquiz.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class DrugiNivo : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
     var correctAnswer = ""
@@ -20,13 +18,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //val Question = QusetionItem(R.drawable., "Pogodi ovu TikTok zvezdu", "", "", "")
-        val Question1 = QusetionItem(R.drawable.wajwai, "Pogodi ovu TikTok zvezdu", "Branko", "Wai Wai", "Wai Wai")
-        val Question2 = QusetionItem(R.drawable.barbiafrika, "Pogodi ovu TikTok zvezdu", "Barbi Afrika", "Uki Q", "Barbi Afrika")
-        val Question3 = QusetionItem(R.drawable.bondisimo, "Pogodi ovu TikTok zvezdu", "Bondisimo", "Ludi Brat", "Bondisimo")
-        val Question4 = QusetionItem(R.drawable.saratkd, "Pogodi ovu TikTok zvezdu", "Anjatkd", "Saratkd", "Saratkd")
-        val Question5 = QusetionItem(R.drawable.osamrastadevet, "Pogodi ovu TikTok zvezdu", "Andrijajo ", "8rasta9", "8rasta9")
+        val Question1 = QusetionItem(R.drawable.mecacazin, "Pogodi ovu TikTok zvezdu", "Nikola Bojcic", "Meca Cazin", "Meca Cazin")
+        val Question2 = QusetionItem(R.drawable.elajerkovic, "Pogodi ovu TikTok zvezdu", "Ela Jerkovic", "Milica Polskaya", "Ela Jerkovic")
+        val Question3 = QusetionItem(R.drawable.draganakovacevic, "Pogodi ovu TikTok zvezdu", "Dragana Kovacevic", "Isidora Jelača", "Dragana Kovacevic")
+        val Question4 = QusetionItem(R.drawable.mirsadkadic, "Pogodi ovu TikTok zvezdu", "Cale", "Mirsad Kadic", "Mirsad Kadic")
+        val Question5 = QusetionItem(R.drawable.janadacovic, "Pogodi ovu TikTok zvezdu", "Nadja Brkic", "Jana Dacovic", "Jana Dacovic")
 
         //questionItemArray.add(Question)
+
         questionItemArray.add(Question1)
         questionItemArray.add(Question2)
         questionItemArray.add(Question3)
@@ -38,11 +37,8 @@ class MainActivity : AppCompatActivity() {
         binding.ansverABTN.setOnClickListener {
             it as TextView
             if (it.text == correctAnswer) {
-                it.setBackgroundColor(Color.GREEN)
-                Handler().postDelayed({
-                    loadQuestion()
-                }, 1000)
-                it.setBackgroundColor(Color.BLACK)
+                Toast.makeText(this, "Your answer is correct!", Toast.LENGTH_SHORT).show()
+                loadQuestion()
             } else {
                 Toast.makeText(this, "Your answer is not correct! Try again!", Toast.LENGTH_SHORT).show()
             }
@@ -51,11 +47,8 @@ class MainActivity : AppCompatActivity() {
         binding.ansverBBTN.setOnClickListener {
             it as TextView
             if (it.text == correctAnswer) {
-                it.setBackgroundColor(Color.GREEN)
-                Handler().postDelayed({
-                    loadQuestion()
-                }, 1000)
-                it.setBackgroundColor(Color.BLACK)
+                Toast.makeText(this, "Your answer is correct!", Toast.LENGTH_SHORT).show()
+                loadQuestion()
             } else {
                 Toast.makeText(this, "Your answer is not correct! Try again!", Toast.LENGTH_SHORT).show()
             }
