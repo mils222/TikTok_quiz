@@ -40,50 +40,43 @@ class MainActivity : AppCompatActivity() {
 
         binding.questionCounter.text = questionItemArray.size.toString()
         binding.correctAnswerCounter.text = correctCounter.toString()
-
         binding.ansverABTN.setOnClickListener {
             it as AppCompatButton
+            binding.ansverABTN.isEnabled = false
+            binding.ansverBBTN.isEnabled = false
+
             if (it.text == correctAnswer) {
                 it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green)
                 correctCounter++
                 binding.correctAnswerCounter.text = correctCounter.toString()
-                binding.ansverBBTN.isEnabled = false
                 Handler().postDelayed({
-                    it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
-                    binding.ansverBBTN.isEnabled = true
                     loadQuestion()
                 }, 1000)
 
             } else {
                 it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.red)
-                binding.ansverBBTN.isEnabled = false
                 Handler().postDelayed({
-                    it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
-                    binding.ansverBBTN.isEnabled = true
                     loadQuestion()
                 }, 1000)
             }
         }
 
         binding.ansverBBTN.setOnClickListener {
+            binding.ansverABTN.isEnabled = false
+            binding.ansverBBTN.isEnabled = false
+
             it as AppCompatButton
             if (it.text == correctAnswer) {
                 it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green)
                 correctCounter++
                 binding.correctAnswerCounter.text = correctCounter.toString()
-                binding.ansverABTN.isEnabled = true
                 Handler().postDelayed({
-                    it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
-                    binding.ansverABTN.isEnabled = false
                     loadQuestion()
                 }, 1000)
 
             } else {
                 it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.red)
-                binding.ansverABTN.isEnabled = true
                 Handler().postDelayed({
-                    it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
-                    binding.ansverABTN.isEnabled = false
                     loadQuestion()
                 }, 1000)
             }
@@ -92,6 +85,10 @@ class MainActivity : AppCompatActivity() {
 
     fun loadQuestion() {
         if(questionItemArray.size > questionIndex) {
+            binding.ansverABTN.isEnabled = true
+            binding.ansverBBTN.isEnabled = true
+            binding.ansverABTN.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
+            binding.ansverBBTN.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
             binding.imgIV.setImageResource(questionItemArray.elementAt(questionIndex).img)
             binding.questionTV.text = questionItemArray.elementAt(questionIndex).question
             binding.ansverABTN.text = questionItemArray.elementAt(questionIndex).answerA
