@@ -6,11 +6,14 @@ import android.os.Handler
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import com.example.tiktokquiz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
+    var correctCounter = 0
     var correctAnswer = ""
     var questionIndex = 0
 
@@ -35,29 +38,54 @@ class MainActivity : AppCompatActivity() {
 
         loadQuestion()
 
+        binding.questionCounter.text = questionItemArray.size.toString()
+        binding.correctAnswerCounter.text = correctCounter.toString()
+
         binding.ansverABTN.setOnClickListener {
-            it as TextView
+            it as AppCompatButton
             if (it.text == correctAnswer) {
-                it.setBackgroundColor(Color.GREEN)
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green)
+                correctCounter++
+                binding.correctAnswerCounter.text = correctCounter.toString()
+                binding.ansverBBTN.isEnabled = false
                 Handler().postDelayed({
+                    it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
+                    binding.ansverBBTN.isEnabled = true
                     loadQuestion()
                 }, 1000)
-                it.setBackgroundColor(Color.BLACK)
+
             } else {
-                Toast.makeText(this, "Your answer is not correct! Try again!", Toast.LENGTH_SHORT).show()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.red)
+                binding.ansverBBTN.isEnabled = false
+                Handler().postDelayed({
+                    it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
+                    binding.ansverBBTN.isEnabled = true
+                    loadQuestion()
+                }, 1000)
             }
         }
 
         binding.ansverBBTN.setOnClickListener {
-            it as TextView
+            it as AppCompatButton
             if (it.text == correctAnswer) {
-                it.setBackgroundColor(Color.GREEN)
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green)
+                correctCounter++
+                binding.correctAnswerCounter.text = correctCounter.toString()
+                binding.ansverABTN.isEnabled = true
                 Handler().postDelayed({
+                    it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
+                    binding.ansverABTN.isEnabled = false
                     loadQuestion()
                 }, 1000)
-                it.setBackgroundColor(Color.BLACK)
+
             } else {
-                Toast.makeText(this, "Your answer is not correct! Try again!", Toast.LENGTH_SHORT).show()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.red)
+                binding.ansverABTN.isEnabled = true
+                Handler().postDelayed({
+                    it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
+                    binding.ansverABTN.isEnabled = false
+                    loadQuestion()
+                }, 1000)
             }
         }
     }
