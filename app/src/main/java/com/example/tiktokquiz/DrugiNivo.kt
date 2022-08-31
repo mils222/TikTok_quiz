@@ -4,17 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
+import com.example.tiktokquiz.databinding.ActivityDrugiNivoBinding
 import com.example.tiktokquiz.databinding.ActivityMainBinding
 
 class DrugiNivo : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityDrugiNivoBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
     var correctAnswer = ""
     var questionIndex = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityDrugiNivoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //val Question = QusetionItem(R.drawable., "Pogodi ovu TikTok zvezdu", "", "", "")
