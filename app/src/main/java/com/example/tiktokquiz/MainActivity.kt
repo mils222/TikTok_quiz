@@ -1,10 +1,12 @@
 package com.example.tiktokquiz
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
@@ -23,11 +25,41 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //val Question = QusetionItem(R.drawable., "Pogodi ovu TikTok zvezdu", "", "", "")
-        val Question1 = QusetionItem(R.drawable.wajwai, "Pogodi ovu TikTok zvezdu", "Branko", "Wai Wai", "Wai Wai")
-        val Question2 = QusetionItem(R.drawable.barbiafrika, "Pogodi ovu TikTok zvezdu", "Barbi Afrika", "Uki Q", "Barbi Afrika")
-        val Question3 = QusetionItem(R.drawable.bondisimo, "Pogodi ovu TikTok zvezdu", "Bondisimo", "Ludi Brat", "Bondisimo")
-        val Question4 = QusetionItem(R.drawable.saratkd, "Pogodi ovu TikTok zvezdu", "Anjatkd", "Saratkd", "Saratkd")
-        val Question5 = QusetionItem(R.drawable.osamrastadevet, "Pogodi ovu TikTok zvezdu", "Andrijajo ", "8rasta9", "8rasta9")
+        val Question1 = QusetionItem(
+            R.drawable.wajwai,
+            "Pogodi ovu TikTok zvezdu",
+            "Branko",
+            "Wai Wai",
+            "Wai Wai"
+        )
+        val Question2 = QusetionItem(
+            R.drawable.barbiafrika,
+            "Pogodi ovu TikTok zvezdu",
+            "Barbi Afrika",
+            "Uki Q",
+            "Barbi Afrika"
+        )
+        val Question3 = QusetionItem(
+            R.drawable.bondisimo,
+            "Pogodi ovu TikTok zvezdu",
+            "Bondisimo",
+            "Ludi Brat",
+            "Bondisimo"
+        )
+        val Question4 = QusetionItem(
+            R.drawable.saratkd,
+            "Pogodi ovu TikTok zvezdu",
+            "Anjatkd",
+            "Saratkd",
+            "Saratkd"
+        )
+        val Question5 = QusetionItem(
+            R.drawable.osamrastadevet,
+            "Pogodi ovu TikTok zvezdu",
+            "Andrijajo ",
+            "8rasta9",
+            "8rasta9"
+        )
 
         //questionItemArray.add(Question)
         questionItemArray.add(Question1)
@@ -84,11 +116,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadQuestion() {
-        if(questionItemArray.size > questionIndex) {
+        if (questionItemArray.size > questionIndex) {
             binding.ansverABTN.isEnabled = true
             binding.ansverBBTN.isEnabled = true
-            binding.ansverABTN.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
-            binding.ansverBBTN.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
+            binding.ansverABTN.backgroundTintList =
+                ContextCompat.getColorStateList(this, R.color.black)
+            binding.ansverBBTN.backgroundTintList =
+                ContextCompat.getColorStateList(this, R.color.black)
             binding.imgIV.setImageResource(questionItemArray.elementAt(questionIndex).img)
             binding.questionTV.text = questionItemArray.elementAt(questionIndex).question
             binding.ansverABTN.text = questionItemArray.elementAt(questionIndex).answerA
@@ -96,7 +130,32 @@ class MainActivity : AppCompatActivity() {
             correctAnswer = questionItemArray.elementAt(questionIndex).correctAnswer
             questionIndex++
         } else {
-            Toast.makeText(this, "Quiz is finished, there is no new questions.", Toast.LENGTH_SHORT).show()
+            firstLevelDialog()
         }
+    }
+
+    fun firstLevelDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("LEVEL 1")
+        if (questionItemArray.size == correctCounter) {
+            builder.setMessage("Congratulations, you can continue to level 2 now.")
+            builder.setPositiveButton("Continue") { dialog, which ->
+                finish()
+                val intent = Intent(this, DrugiNivo::class.java)
+                startActivity(intent)
+            }
+        } else {
+            builder.setMessage("You need all correct answers to continue to the next level. Please try again.")
+            builder.setPositiveButton("Try again") { dialog, which ->
+                val intent = intent
+                finish()
+                startActivity(intent)
+            }
+        }
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            finish()
+        }
+        builder.setCancelable(false)
+        builder.show()
     }
 }
