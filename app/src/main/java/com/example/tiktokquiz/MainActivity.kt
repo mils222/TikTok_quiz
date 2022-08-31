@@ -1,14 +1,19 @@
 package com.example.tiktokquiz
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import com.example.tiktokquiz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
+    var correctCounter = 0
     var correctAnswer = ""
     var questionIndex = 0
 
@@ -17,47 +22,77 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val firstQuestion = QusetionItem(R.drawable.cimi, "Guess this YouTube Star", "Baka Prase", "Simi", "Simi")
-        val secondQuestion = QusetionItem(R.drawable.wajwai, "Guess this TikTok Star", "Branko", "Wai Wai", "Wai Wai")
-        val thirdQuestion = QusetionItem(R.drawable.janko, "Guess this YouTube Star", "Janko", "Choda", "Janko")
-        val fortQuestion = QusetionItem(R.drawable.bakaprase, "Guess this YouTube Star", "tvoja keva", "Baka Prase", "Baka Prase")
+        //val Question = QusetionItem(R.drawable., "Pogodi ovu TikTok zvezdu", "", "", "")
+        val Question1 = QusetionItem(R.drawable.wajwai, "Pogodi ovu TikTok zvezdu", "Branko", "Wai Wai", "Wai Wai")
+        val Question2 = QusetionItem(R.drawable.barbiafrika, "Pogodi ovu TikTok zvezdu", "Barbi Afrika", "Uki Q", "Barbi Afrika")
+        val Question3 = QusetionItem(R.drawable.bondisimo, "Pogodi ovu TikTok zvezdu", "Bondisimo", "Ludi Brat", "Bondisimo")
+        val Question4 = QusetionItem(R.drawable.saratkd, "Pogodi ovu TikTok zvezdu", "Anjatkd", "Saratkd", "Saratkd")
+        val Question5 = QusetionItem(R.drawable.osamrastadevet, "Pogodi ovu TikTok zvezdu", "Andrijajo ", "8rasta9", "8rasta9")
 
-
-        questionItemArray.add(firstQuestion)
-        questionItemArray.add(secondQuestion)
-        questionItemArray.add(thirdQuestion)
-        questionItemArray.add(fortQuestion)
-
+        //questionItemArray.add(Question)
+        questionItemArray.add(Question1)
+        questionItemArray.add(Question2)
+        questionItemArray.add(Question3)
+        questionItemArray.add(Question4)
+        questionItemArray.add(Question5)
 
         loadQuestion()
 
-        binding.ansverATV.setOnClickListener {
-            it as TextView
+        binding.questionCounter.text = questionItemArray.size.toString()
+        binding.correctAnswerCounter.text = correctCounter.toString()
+        binding.ansverABTN.setOnClickListener {
+            it as AppCompatButton
+            binding.ansverABTN.isEnabled = false
+            binding.ansverBBTN.isEnabled = false
+
             if (it.text == correctAnswer) {
-                Toast.makeText(this, "Your answer is correct!", Toast.LENGTH_SHORT).show()
-                loadQuestion()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green)
+                correctCounter++
+                binding.correctAnswerCounter.text = correctCounter.toString()
+                Handler().postDelayed({
+                    loadQuestion()
+                }, 1000)
+
             } else {
-                Toast.makeText(this, "Your answer is not correct! Try again!", Toast.LENGTH_SHORT).show()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.red)
+                Handler().postDelayed({
+                    loadQuestion()
+                }, 1000)
             }
         }
 
-        binding.ansverBTV.setOnClickListener {
-            it as TextView
+        binding.ansverBBTN.setOnClickListener {
+            binding.ansverABTN.isEnabled = false
+            binding.ansverBBTN.isEnabled = false
+
+            it as AppCompatButton
             if (it.text == correctAnswer) {
-                Toast.makeText(this, "Your answer is correct!", Toast.LENGTH_SHORT).show()
-                loadQuestion()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green)
+                correctCounter++
+                binding.correctAnswerCounter.text = correctCounter.toString()
+                Handler().postDelayed({
+                    loadQuestion()
+                }, 1000)
+
             } else {
-                Toast.makeText(this, "Your answer is not correct! Try again!", Toast.LENGTH_SHORT).show()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.red)
+                Handler().postDelayed({
+                    loadQuestion()
+                }, 1000)
             }
         }
     }
 
     fun loadQuestion() {
         if(questionItemArray.size > questionIndex) {
+            binding.ansverABTN.isEnabled = true
+            binding.ansverBBTN.isEnabled = true
+            binding.ansverABTN.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
+            binding.ansverBBTN.backgroundTintList = ContextCompat.getColorStateList(this, R.color.black)
             binding.imgIV.setImageResource(questionItemArray.elementAt(questionIndex).img)
             binding.questionTV.text = questionItemArray.elementAt(questionIndex).question
-            binding.ansverATV.text = questionItemArray.elementAt(questionIndex).answerA
-            binding.ansverBTV.text = questionItemArray.elementAt(questionIndex).answerB
+            binding.ansverABTN.text = questionItemArray.elementAt(questionIndex).answerA
+            binding.ansverBBTN.text = questionItemArray.elementAt(questionIndex).answerB
             correctAnswer = questionItemArray.elementAt(questionIndex).correctAnswer
             questionIndex++
         } else {
