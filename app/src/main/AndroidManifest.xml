@@ -26,11 +26,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".FirstLevelActivity"
             android:exported="true"
             android:parentActivityName=".StartActivity" />
         <activity
-            android:name=".DrugiNivo"
+            android:name=".SecondLevelActivity"
             android:exported="false"
             android:parentActivityName=".StartActivity" />
     </application>

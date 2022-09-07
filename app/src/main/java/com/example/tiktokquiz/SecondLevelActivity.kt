@@ -7,7 +7,7 @@ import android.widget.Toast
 import com.example.tiktokquiz.databinding.ActivityDrugiNivoBinding
 import com.example.tiktokquiz.databinding.ActivityMainBinding
 
-class DrugiNivo : AppCompatActivity() {
+class SecondLevelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDrugiNivoBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
     var correctAnswer = ""

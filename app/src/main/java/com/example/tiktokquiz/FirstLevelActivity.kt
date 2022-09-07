@@ -1,11 +1,8 @@
 package com.example.tiktokquiz
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -13,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import com.example.tiktokquiz.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class FirstLevelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
     var correctCounter = 0
@@ -143,7 +140,7 @@ class MainActivity : AppCompatActivity() {
             builder.setMessage("Congratulations, you can continue to level 2 now.")
             builder.setPositiveButton("Continue") { dialog, which ->
                 finish()
-                val intent = Intent(this, DrugiNivo::class.java)
+                val intent = Intent(this, SecondLevelActivity::class.java)
                 startActivity(intent)
             }
         } else {
