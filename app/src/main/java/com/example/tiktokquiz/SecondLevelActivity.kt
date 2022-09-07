@@ -1,15 +1,22 @@
 package com.example.tiktokquiz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import com.example.tiktokquiz.databinding.ActivityDrugiNivoBinding
 import com.example.tiktokquiz.databinding.ActivityMainBinding
 
 class SecondLevelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDrugiNivoBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
+    var correctCounter = 0
     var correctAnswer = ""
     var questionIndex = 0
 
@@ -35,29 +42,59 @@ class SecondLevelActivity : AppCompatActivity() {
 
         loadQuestion()
 
+        binding.questionCounter.text = questionItemArray.size.toString()
+        binding.correctAnswerCounter.text = correctCounter.toString()
         binding.ansverABTN.setOnClickListener {
-            it as TextView
+            it as AppCompatButton
+            binding.ansverABTN.isEnabled = false
+            binding.ansverBBTN.isEnabled = false
+
             if (it.text == correctAnswer) {
-                Toast.makeText(this, "Your answer is correct!", Toast.LENGTH_SHORT).show()
-                loadQuestion()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green)
+                correctCounter++
+                binding.correctAnswerCounter.text = correctCounter.toString()
+                Handler().postDelayed({
+                    loadQuestion()
+                }, 1000)
+
             } else {
-                Toast.makeText(this, "Your answer is not correct! Try again!", Toast.LENGTH_SHORT).show()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.red)
+                Handler().postDelayed({
+                    loadQuestion()
+                }, 1000)
             }
         }
 
         binding.ansverBBTN.setOnClickListener {
-            it as TextView
+            binding.ansverABTN.isEnabled = false
+            binding.ansverBBTN.isEnabled = false
+
+            it as AppCompatButton
             if (it.text == correctAnswer) {
-                Toast.makeText(this, "Your answer is correct!", Toast.LENGTH_SHORT).show()
-                loadQuestion()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.green)
+                correctCounter++
+                binding.correctAnswerCounter.text = correctCounter.toString()
+                Handler().postDelayed({
+                    loadQuestion()
+                }, 1000)
+
             } else {
-                Toast.makeText(this, "Your answer is not correct! Try again!", Toast.LENGTH_SHORT).show()
+                it.backgroundTintList = ContextCompat.getColorStateList(this, R.color.red)
+                Handler().postDelayed({
+                    loadQuestion()
+                }, 1000)
             }
         }
     }
 
     fun loadQuestion() {
-        if(questionItemArray.size > questionIndex) {
+        if (questionItemArray.size > questionIndex) {
+            binding.ansverABTN.isEnabled = true
+            binding.ansverBBTN.isEnabled = true
+            binding.ansverABTN.backgroundTintList =
+                ContextCompat.getColorStateList(this, R.color.black)
+            binding.ansverBBTN.backgroundTintList =
+                ContextCompat.getColorStateList(this, R.color.black)
             binding.imgIV.setImageResource(questionItemArray.elementAt(questionIndex).img)
             binding.questionTV.text = questionItemArray.elementAt(questionIndex).question
             binding.ansverABTN.text = questionItemArray.elementAt(questionIndex).answerA
@@ -65,7 +102,43 @@ class SecondLevelActivity : AppCompatActivity() {
             correctAnswer = questionItemArray.elementAt(questionIndex).correctAnswer
             questionIndex++
         } else {
-            Toast.makeText(this, "Quiz is finished, there is no new questions.", Toast.LENGTH_SHORT).show()
+            firstLevelDialog()
         }
+    }
+
+    fun firstLevelDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("LEVEL 2")
+        if (questionItemArray.size == correctCounter) {
+            saveLevel("secondLevel", "Unlocked")
+            builder.setMessage("Congratulations, you can continue to level 3 now.")
+            builder.setPositiveButton("Continue") { dialog, which ->
+                finish()
+                val intent = Intent(this, SecondLevelActivity::class.java)
+                startActivity(intent)
+            }
+        } else {
+            builder.setMessage("You need all correct answers to continue to the next level. Please try again.")
+            builder.setPositiveButton("Try again") { dialog, which ->
+                val intent = intent
+                finish()
+                startActivity(intent)
+            }
+        }
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            finishAffinity()
+            val intent = Intent(this, StartActivity::class.java)
+            startActivity(intent)
+
+        }
+        builder.setCancelable(false)
+        builder.show()
+    }
+
+    fun saveLevel(key: String, value: String) {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val editor = preferences.edit()
+        editor.putString(key, value)
+        editor.apply()
     }
 }
