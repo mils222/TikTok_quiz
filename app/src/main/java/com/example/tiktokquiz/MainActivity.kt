@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import com.example.tiktokquiz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -138,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("LEVEL 1")
         if (questionItemArray.size == correctCounter) {
+            saveLevel("secondLevel", "Unlocked")
             builder.setMessage("Congratulations, you can continue to level 2 now.")
             builder.setPositiveButton("Continue") { dialog, which ->
                 finish()
@@ -153,9 +155,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
         builder.setNegativeButton("Cancel") { dialog, which ->
-            finish()
+            finishAffinity()
+            val intent = Intent(this, StartActivity::class.java)
+            startActivity(intent)
+
         }
         builder.setCancelable(false)
         builder.show()
+    }
+
+    fun saveLevel(key: String, value: String) {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val editor = preferences.edit()
+        editor.putString(key, value)
+        editor.apply()
     }
 }
