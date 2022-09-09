@@ -4,17 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
-import com.example.tiktokquiz.databinding.ActivityDrugiNivoBinding
-import com.example.tiktokquiz.databinding.ActivityMainBinding
+import com.example.tiktokquiz.databinding.ActivitySecondLevelBinding
 
 class SecondLevelActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDrugiNivoBinding
+    private lateinit var binding: ActivitySecondLevelBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
     var correctCounter = 0
     var correctAnswer = ""
@@ -22,7 +19,7 @@ class SecondLevelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDrugiNivoBinding.inflate(layoutInflater)
+        binding = ActivitySecondLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //val Question = QusetionItem(R.drawable., "Pogodi ovu TikTok zvezdu", "", "", "")
@@ -102,19 +99,19 @@ class SecondLevelActivity : AppCompatActivity() {
             correctAnswer = questionItemArray.elementAt(questionIndex).correctAnswer
             questionIndex++
         } else {
-            firstLevelDialog()
+            secondLevelDialog()
         }
     }
 
-    fun firstLevelDialog() {
+    fun secondLevelDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("LEVEL 2")
         if (questionItemArray.size == correctCounter) {
-            saveLevel("secondLevel", "Unlocked")
+            saveLevel("thirdLevel", "Unlocked")
             builder.setMessage("Congratulations, you can continue to level 3 now.")
             builder.setPositiveButton("Continue") { dialog, which ->
                 finish()
-                val intent = Intent(this, SecondLevelActivity::class.java)
+                val intent = Intent(this, ThirdLevelActivity::class.java)
                 startActivity(intent)
             }
         } else {
@@ -127,7 +124,7 @@ class SecondLevelActivity : AppCompatActivity() {
         }
         builder.setNegativeButton("Cancel") { dialog, which ->
             finishAffinity()
-            val intent = Intent(this, StartActivity::class.java)
+            val intent = Intent(this, TikTokActivity::class.java)
             startActivity(intent)
 
         }

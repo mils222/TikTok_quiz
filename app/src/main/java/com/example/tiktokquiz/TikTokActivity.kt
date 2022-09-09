@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.preference.PreferenceManager
 import com.example.tiktokquiz.databinding.ActivityStartBinding
 
-class StartActivity : AppCompatActivity() {
+class TikTokActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,16 +15,20 @@ class StartActivity : AppCompatActivity() {
 
         checkLevel()
 
-        binding.prviNivo.setOnClickListener {
+        binding.firstLevel.setOnClickListener {
             val intent = Intent(this, FirstLevelActivity::class.java)
             startActivity(intent)
         }
 
-        binding.drugiNivo.setOnClickListener {
+        binding.secondLevel.setOnClickListener {
             val intent = Intent(this, SecondLevelActivity::class.java)
             startActivity(intent)
         }
 
+        binding.thirdLevel.setOnClickListener {
+            val intent = Intent(this, ThirdLevelActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     fun checkLevel() {
@@ -33,7 +37,10 @@ class StartActivity : AppCompatActivity() {
         listOfAllKeys.forEach { key ->
             when (key) {
                 "secondLevel" -> if(preferences.getString(key, null) == "Unlocked") {
-                    binding.drugiNivo.isEnabled = true
+                    binding.secondLevel.isEnabled = true
+                }
+                "thirdLevel" -> if(preferences.getString(key, null) == "Unlocked") {
+                    binding.thirdLevel.isEnabled = true
                 }
                 else -> error("Unknown error occured.")
             }

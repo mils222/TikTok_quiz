@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartActivity">
+    tools:context=".TikTokActivity">
 
     <TextView
-        android:id="@+id/prviNivoTekst"
+        android:id="@+id/headline"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginBottom="6dp"
@@ -16,12 +16,12 @@
         android:textSize="50sp"
         android:textColor="@color/black"
         android:textFontWeight="@integer/material_motion_duration_short_2"
-        app:layout_constraintBottom_toTopOf="@+id/prviNivo"
+        app:layout_constraintBottom_toTopOf="@+id/firstLevel"
 
         app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <Button
-        android:id="@+id/prviNivo"
+        android:id="@+id/firstLevel"
         android:layout_width="200dp"
         android:layout_height="65dp"
         android:layout_marginTop="100dp"
@@ -39,7 +39,7 @@
 
 
     <Button
-        android:id="@+id/drugiNivo"
+        android:id="@+id/secondLevel"
         android:layout_width="200dp"
         android:layout_height="65dp"
         android:layout_marginTop="15dp"
@@ -49,7 +49,23 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prviNivo"
+        app:layout_constraintTop_toBottomOf="@+id/firstLevel"
+
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/thirdLevel"
+        android:layout_width="200dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/roundstyle"
+        android:text="TRECI NIVO"
+        android:enabled="false"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondLevel"
 
         >
     </Button>

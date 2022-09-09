@@ -8,11 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
-import com.example.tiktokquiz.databinding.ActivityFirstLevelBinding
+import com.example.tiktokquiz.databinding.ActivityThirdLevelBinding
 
-
-class FirstLevelActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityFirstLevelBinding
+class ThirdLevelActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityThirdLevelBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
     var correctCounter = 0
     var correctAnswer = ""
@@ -20,52 +19,25 @@ class FirstLevelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFirstLevelBinding.inflate(layoutInflater)
+        binding = ActivityThirdLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //val Question = QusetionItem(R.drawable., "Pogodi ovu TikTok zvezdu", "", "", "")
         val Question1 = QusetionItem(
-            R.drawable.wajwai,
+            R.drawable.dzonipony,
             "Pogodi ovu TikTok zvezdu",
-            "Branko",
-            "Wai Wai",
-            "Wai Wai"
+            "Ascericm",
+            "Dzoni Pony",
+            "Dzoni Pony"
         )
-        val Question2 = QusetionItem(
-            R.drawable.barbiafrika,
-            "Pogodi ovu TikTok zvezdu",
-            "Barbi Afrika",
-            "Uki Q",
-            "Barbi Afrika"
-        )
-        val Question3 = QusetionItem(
-            R.drawable.bondisimo,
-            "Pogodi ovu TikTok zvezdu",
-            "Bondisimo",
-            "Ludi Brat",
-            "Bondisimo"
-        )
-        val Question4 = QusetionItem(
-            R.drawable.saratkd,
-            "Pogodi ovu TikTok zvezdu",
-            "Anjatkd",
-            "Saratkd",
-            "Saratkd"
-        )
-        val Question5 = QusetionItem(
-            R.drawable.osamrastadevet,
-            "Pogodi ovu TikTok zvezdu",
-            "Andrijajo ",
-            "8rasta9",
-            "8rasta9"
-        )
+
 
         //questionItemArray.add(Question)
         questionItemArray.add(Question1)
-        questionItemArray.add(Question2)
+/*        questionItemArray.add(Question2)
         questionItemArray.add(Question3)
         questionItemArray.add(Question4)
-        questionItemArray.add(Question5)
+        questionItemArray.add(Question5)*/
 
         loadQuestion()
 
@@ -129,19 +101,19 @@ class FirstLevelActivity : AppCompatActivity() {
             correctAnswer = questionItemArray.elementAt(questionIndex).correctAnswer
             questionIndex++
         } else {
-            firstLevelDialog()
+            thirdLevelDialog()
         }
     }
 
-    fun firstLevelDialog() {
+    fun thirdLevelDialog() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("LEVEL 1")
+        builder.setTitle("LEVEL 3")
         if (questionItemArray.size == correctCounter) {
             saveLevel("secondLevel", "Unlocked")
-            builder.setMessage("Congratulations, you can continue to level 2 now.")
+            builder.setMessage("Congratulations, you finished quiz.")
             builder.setPositiveButton("Continue") { dialog, which ->
                 finish()
-                val intent = Intent(this, SecondLevelActivity::class.java)
+                val intent = Intent(this, TikTokActivity::class.java)
                 startActivity(intent)
             }
         } else {
