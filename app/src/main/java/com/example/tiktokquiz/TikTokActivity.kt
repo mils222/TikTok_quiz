@@ -42,7 +42,7 @@ class TikTokActivity : AppCompatActivity() {
                 "thirdLevel" -> if(preferences.getString(key, null) == "Unlocked") {
                     binding.thirdLevel.isEnabled = true
                 }
-                else -> error("Unknown error occured.")
+               // else -> error("Unknown error occured.")
             }
         }
     }

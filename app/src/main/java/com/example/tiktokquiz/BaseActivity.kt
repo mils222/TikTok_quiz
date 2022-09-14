@@ -33,7 +33,7 @@ class BaseActivity : AppCompatActivity() {
                 "youtube" -> if(preferences.getString(key, null) == "Unlocked") {
                     binding.youtube.isEnabled = true
                 }
-                else -> error("Unknown error occured.")
+               // else -> error("Unknown error occured.")
             }
         }
     }
