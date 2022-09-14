@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BaseActivity">
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tiktok"
+        android:layout_width="@dimen/category_button_width"
+        android:layout_height="@dimen/category_button_height"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/roundstyle"
+        android:text="TikTok"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/youtube"
+        >
+    </androidx.appcompat.widget.AppCompatButton>
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/youtube"
+        android:layout_width="@dimen/category_button_width"
+        android:layout_height="@dimen/category_button_height"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/roundstyle"
+        android:text="Youtube"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        >
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/three"
+        android:layout_width="@dimen/category_button_width"
+        android:layout_height="@dimen/category_button_height"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/roundstyle"
+        android:text="3"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiktok"
+        app:layout_constraintEnd_toStartOf="@id/four"
+        >
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/four"
+        android:layout_width="@dimen/category_button_width"
+        android:layout_height="@dimen/category_button_height"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/roundstyle"
+        android:text="4"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/youtube"
+        >
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/five"
+        android:layout_width="@dimen/category_button_width"
+        android:layout_height="@dimen/category_button_height"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/roundstyle"
+        android:text="5"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/three"
+        app:layout_constraintEnd_toStartOf="@id/six"
+        >
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/six"
+        android:layout_width="@dimen/category_button_width"
+        android:layout_height="@dimen/category_button_height"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/roundstyle"
+        android:text="6"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/four"
+        >
+    </androidx.appcompat.widget.AppCompatButton>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
