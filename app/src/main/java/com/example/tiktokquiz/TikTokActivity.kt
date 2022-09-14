@@ -4,13 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.preference.PreferenceManager
-import com.example.tiktokquiz.databinding.ActivityStartBinding
+import com.example.tiktokquiz.databinding.ActivityTiktokBinding
 
 class TikTokActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityStartBinding
+    private lateinit var binding: ActivityTiktokBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityStartBinding.inflate(layoutInflater)
+        binding = ActivityTiktokBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         checkLevel()
@@ -42,7 +42,7 @@ class TikTokActivity : AppCompatActivity() {
                 "thirdLevel" -> if(preferences.getString(key, null) == "Unlocked") {
                     binding.thirdLevel.isEnabled = true
                 }
-                else -> error("Unknown error occured.")
+               // else -> error("Unknown error occured.")
             }
         }
     }
