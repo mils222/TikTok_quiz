@@ -1,17 +1,17 @@
 package com.example.tiktokquiz
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
-import com.example.tiktokquiz.databinding.ActivitySecondLevelBinding
+import com.example.tiktokquiz.databinding.ActivityTiktokThirdLevelBinding
 
-class SecondLevelActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySecondLevelBinding
+class TikTokThirdLevelActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityTiktokThirdLevelBinding
     private var questionItemArray = arrayListOf<QusetionItem>()
     var correctCounter = 0
     var correctAnswer = ""
@@ -19,23 +19,36 @@ class SecondLevelActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySecondLevelBinding.inflate(layoutInflater)
+        binding = ActivityTiktokThirdLevelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val Question = QusetionItem(R.drawable., "Pogodi ovu TikTok zvezdu", "", "", "")
-        val Question1 = QusetionItem(R.drawable.mecacazin, "Pogodi ovu TikTok zvezdu", "Nikola Bojcic", "Meca Cazin", "Meca Cazin")
-        val Question2 = QusetionItem(R.drawable.elajerkovic, "Pogodi ovu TikTok zvezdu", "Ela Jerkovic", "Milica Polskaya", "Ela Jerkovic")
-        val Question3 = QusetionItem(R.drawable.draganakovacevic, "Pogodi ovu TikTok zvezdu", "Dragana Kovacevic", "Isidora Jelača", "Dragana Kovacevic")
-        val Question4 = QusetionItem(R.drawable.mirsadkadic, "Pogodi ovu TikTok zvezdu", "Cale", "Mirsad Kadic", "Mirsad Kadic")
-        val Question5 = QusetionItem(R.drawable.janadacovic, "Pogodi ovu TikTok zvezdu", "Nadja Brkic", "Jana Dacovic", "Jana Dacovic")
+        val Question1 = QusetionItem(
+            R.drawable.dzonipony,
+            "Pogodi ovu TikTok zvezdu",
+            "Ascericm",
+            "Dzoni Pony",
+            "Dzoni Pony"
+        )
 
-        //questionItemArray.add(Question)
+        val Question2 = QusetionItem(
+            R.drawable.mihailokocic,
+            "Pogodi ovu TikTok zvezdu",
+            "Mihailo Kocic",
+            "Voja King",
+            "Mihailo Kocic"
+        )
+
+        val Question3 = QusetionItem(
+            R.drawable.nikastankovic,
+            "Pogodi ovu TikTok zvezdu",
+            "Nika Stankovic",
+            "Teodora Popovska",
+            "Nika Stankovic"
+        )
 
         questionItemArray.add(Question1)
         questionItemArray.add(Question2)
         questionItemArray.add(Question3)
-        questionItemArray.add(Question4)
-        questionItemArray.add(Question5)
 
         loadQuestion()
 
@@ -99,19 +112,19 @@ class SecondLevelActivity : AppCompatActivity() {
             correctAnswer = questionItemArray.elementAt(questionIndex).correctAnswer
             questionIndex++
         } else {
-            secondLevelDialog()
+            thirdLevelDialog()
         }
     }
 
-    fun secondLevelDialog() {
+    fun thirdLevelDialog() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("LEVEL 2")
+        builder.setTitle("LEVEL 3")
         if (questionItemArray.size == correctCounter) {
-            saveLevel("thirdLevel", "Unlocked")
-            builder.setMessage("Congratulations, you can continue to level 3 now.")
+            saveLevel("tiktok", "Done")
+            builder.setMessage("Congratulations, you finished quiz.")
             builder.setPositiveButton("Continue") { dialog, which ->
                 finish()
-                val intent = Intent(this, ThirdLevelActivity::class.java)
+                val intent = Intent(this, BaseActivity::class.java)
                 startActivity(intent)
             }
         } else {

@@ -16,17 +16,17 @@ class TikTokActivity : AppCompatActivity() {
         checkLevel()
 
         binding.firstLevel.setOnClickListener {
-            val intent = Intent(this, FirstLevelActivity::class.java)
+            val intent = Intent(this, TikTokFirstLevelActivity::class.java)
             startActivity(intent)
         }
 
         binding.secondLevel.setOnClickListener {
-            val intent = Intent(this, SecondLevelActivity::class.java)
+            val intent = Intent(this, TikTokSecondLevelActivity::class.java)
             startActivity(intent)
         }
 
         binding.thirdLevel.setOnClickListener {
-            val intent = Intent(this, ThirdLevelActivity::class.java)
+            val intent = Intent(this, TikTokThirdLevelActivity::class.java)
             startActivity(intent)
         }
 
