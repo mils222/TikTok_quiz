@@ -19,6 +19,11 @@ class BaseActivity : AppCompatActivity() {
             val intent = Intent(this, TikTokActivity::class.java)
             startActivity(intent)
         }
+        binding.youtube.setOnClickListener {
+            val intent = Intent(this, YouTubeActivity::class.java)
+            startActivity(intent)
+        }
+
     }
     fun checkCategory() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
@@ -30,8 +35,9 @@ class BaseActivity : AppCompatActivity() {
                         ContextCompat.getColorStateList(this, R.color.green)
 
                 }
-                "youtube" -> if(preferences.getString(key, null) == "Unlocked") {
-                    binding.youtube.isEnabled = true
+                "youtube" -> if(preferences.getString(key, null) == "Done") {
+                    binding.youtube.backgroundTintList =
+                        ContextCompat.getColorStateList(this, R.color.green)
                 }
                // else -> error("Unknown error occured.")
             }
